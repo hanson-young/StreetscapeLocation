@@ -9,6 +9,6 @@ StreetscapeLocation
 
 - [ ] 确定大概定位（初赛阶段）   
 
-- [ ] 双目视觉PCL   
+- [ ] 双目视觉配准PCL[参考](https://www.cnblogs.com/riddick/p/8486223.html)   
 
-- [ ] 点云配准准确定位（复赛）  
+- [ ] 点云匹配准确定位（复赛）[参考](https://blog.csdn.net/wishchin/article/details/74279021)  
