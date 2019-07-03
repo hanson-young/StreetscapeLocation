@@ -27,13 +27,12 @@ for sence in glob.glob(root0):
     sence_dir = osp.split(sence)
     data_dir = sence_dir[1] + '/*'
     data_dir = osp.join(root, data_dir)
-
     for dir_name in glob.glob(data_dir):
         l = len(root)
         save_path = osp.join(save_dir, dir_name[l:])
         img_paths = glob.glob(osp.join(dir_name, '*.jpg'))
         for fname in img_paths:
-            if fname[-13:] == 'thumbnail.jpg':
+            if fname[-13:] == 'thumbnail.jpg' or fname[-8:] == 'pano.jpg':
                 continue
             else:
                 img = cv2.imread(fname)
