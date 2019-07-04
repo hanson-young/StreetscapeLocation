@@ -4,7 +4,7 @@
 - [x] 纠正图像 主要代码distort.py  
 [参考](https://blog.csdn.net/hpuhjl/article/details/80899931)  
 
-- [ ] 图像搜索   
+- [x] 图像搜索   
 [参考](https://github.com/zibuyu1995/ApplicationInImageProcessing/tree/master/orb_image_search)
 
 - [ ] 确定大概定位（初赛阶段）   
@@ -15,17 +15,26 @@
 
 
 
-### 图像搜索大致流程：
-- 建立一个tiny database，命名dataset.db，存有所有gallery image的feature，后续可将每个gallery image对应的location一并存入database，
-方便检索与结果写入；
+### 1.0版操作流程：
+- 数据集处理，将每个scence中的全景图thumbnail.jpg提取出来并按照子文件夹名称重新命名，组成新的数据集文件query_scenceK和gallery_scenceK:
 
 ```python
-python generate_index.py
+python datasets_pano.py
 ```
 
-- 对于每个query image，对其提取特征后，与gallery database对比，对比方式为暴力枚举或KNN，输出格式为：(图片名称，匹配特征点个数)；
+- gallery特征提取，并按照不同的scence分别存储为datasetK.db:
 ```python
-python img_search.py
+python orb_search/generate_index.py
 ```
 
-- 注：gallery_img文件夹中图片包含了query_img中所有图片，主要是想测试以下算法能不能不能够检索出“自己”；图像搜索效果不是很理想。
+- 提取query图像特征并与gallery做匹配，输出top6匹配的gallery图像名称及匹配点数，保存为文件query_gallery_search.csv和query_gallery_value.csv:
+```python
+python query_gallery_search.py
+```
+
+- 根据top6（或者不全用）匹配计算query的相机坐标并保存为文件my_result.csv:
+```python
+python coordinate.py
+```
+
+- 注：记得更改文件路径，方法略暴力，提升空间很大，诸君加油
